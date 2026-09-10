@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B14" />
+      <stop offset="50%" stop-color="#0D1527" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8">
+        <animate attributeName="stop-color" values="#38BDF8;#818CF8;#C084FC;#38BDF8" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" stop-color="#818CF8">
+        <animate attributeName="stop-color" values="#818CF8;#C084FC;#38BDF8;#818CF8" dur="8s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#C084FC">
+        <animate attributeName="stop-color" values="#C084FC;#38BDF8;#818CF8;#C084FC" dur="8s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0" />
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#C084FC" stop-opacity="0" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="0.7" stroke-opacity="0.6" />
+    </pattern>
+
+    <style>
+      @keyframes floatSlow {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+      }
+      @keyframes pulseGlow {
+        0%, 100% { opacity: 0.4; r: 4px; }
+        50% { opacity: 0.9; r: 6.5px; }
+      }
+      @keyframes dashAnim {
+        from { stroke-dashoffset: 200; }
+        to { stroke-dashoffset: 0; }
+      }
+      .floating {
+        animation: floatSlow 6s ease-in-out infinite;
+      }
+      .node-pulse-1 { animation: pulseGlow 3s ease-in-out infinite; }
+      .node-pulse-2 { animation: pulseGlow 3.5s ease-in-out infinite 0.7s; }
+      .node-pulse-3 { animation: pulseGlow 4s ease-in-out infinite 1.4s; }
+      .stream-line {
+        stroke-dasharray: 8, 8;
+        animation: dashAnim 12s linear infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#bgGrad)" />
+  <rect width="1200" height="400" fill="url(#grid)" />
+
+  <!-- Ambient Glow Orbs -->
+  <circle cx="200" cy="120" r="180" fill="#38BDF8" opacity="0.07" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.05;0.12;0.05" dur="6s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="1000" cy="280" r="220" fill="#818CF8" opacity="0.08" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.06;0.14;0.06" dur="7s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="600" cy="200" r="260" fill="#A855F7" opacity="0.05" filter="url(#glow)" />
+
+  <!-- Neural / Architecture Network Graph Lines -->
+  <g stroke="#38BDF8" stroke-opacity="0.3" stroke-width="1.5" class="stream-line">
+    <path d="M 120 280 L 240 180 L 360 220 L 480 140 L 600 200 L 720 130 L 860 220 L 980 160 L 1080 240" fill="none" />
+    <path d="M 160 340 L 280 260 L 420 290 L 560 220 L 700 280 L 840 200 L 960 270 L 1060 180" fill="none" stroke="#C084FC" stroke-opacity="0.25" />
+    <path d="M 240 180 L 280 260 M 360 220 L 420 290 M 480 140 L 560 220 M 720 130 L 700 280 M 860 220 L 840 200" fill="none" stroke="#818CF8" stroke-opacity="0.2" />
+  </g>
+
+  <!-- Network Nodes -->
+  <circle cx="120" cy="280" class="node-pulse-1" fill="#38BDF8" filter="url(#softGlow)" />
+  <circle cx="240" cy="180" class="node-pulse-2" fill="#818CF8" filter="url(#softGlow)" />
+  <circle cx="360" cy="220" class="node-pulse-3" fill="#38BDF8" filter="url(#softGlow)" />
+  <circle cx="480" cy="140" class="node-pulse-1" fill="#C084FC" filter="url(#softGlow)" />
+  <circle cx="600" cy="200" class="node-pulse-2" fill="#38BDF8" filter="url(#softGlow)" />
+  <circle cx="720" cy="130" class="node-pulse-3" fill="#818CF8" filter="url(#softGlow)" />
+  <circle cx="860" cy="220" class="node-pulse-1" fill="#C084FC" filter="url(#softGlow)" />
+  <circle cx="980" cy="160" class="node-pulse-2" fill="#38BDF8" filter="url(#softGlow)" />
+  <circle cx="1080" cy="240" class="node-pulse-3" fill="#818CF8" filter="url(#softGlow)" />
+
+  <!-- Center Floating Content -->
+  <g class="floating">
+    <!-- Badge Pill -->
+    <g transform="translate(450, 60)">
+      <rect width="300" height="34" rx="17" fill="#1E293B" fill-opacity="0.8" stroke="#38BDF8" stroke-width="1.2" stroke-opacity="0.7" />
+      <circle cx="22" cy="17" r="5" fill="#10B981">
+        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <text x="36" y="22" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" letter-spacing="1">ENTERPRISE AI DIRECTORY</text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="600" y="160" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="46" font-weight="800" fill="url(#accentGrad)" letter-spacing="-0.5" filter="url(#softGlow)">
+      Awesome Enterprise AI Platform
+    </text>
+
+    <!-- Subtitle -->
+    <text x="600" y="205" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="400" fill="#E2E8F0" opacity="0.9" letter-spacing="0.2">
+      Curated Landscape of Commercial SaaS &amp; Open-Source AI Infrastructure
+    </text>
+
+    <!-- Feature Tag Pills -->
+    <g transform="translate(180, 240)">
+      <!-- Pill 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="180" height="36" rx="8" fill="#1E293B" fill-opacity="0.6" stroke="#475569" stroke-width="1" />
+        <text x="90" y="23" text-anchor="middle" fill="#38BDF8" font-family="sans-serif" font-size="13" font-weight="600">🤖 Foundation &amp; LLMs</text>
+      </g>
+      <!-- Pill 2 -->
+      <g transform="translate(195, 0)">
+        <rect width="150" height="36" rx="8" fill="#1E293B" fill-opacity="0.6" stroke="#475569" stroke-width="1" />
+        <text x="75" y="23" text-anchor="middle" fill="#818CF8" font-family="sans-serif" font-size="13" font-weight="600">⚡ AI Agents</text>
+      </g>
+      <!-- Pill 3 -->
+      <g transform="translate(360, 0)">
+        <rect width="140" height="36" rx="8" fill="#1E293B" fill-opacity="0.6" stroke="#475569" stroke-width="1" />
+        <text x="70" y="23" text-anchor="middle" fill="#C084FC" font-family="sans-serif" font-size="13" font-weight="600">📚 Enterprise RAG</text>
+      </g>
+      <!-- Pill 4 -->
+      <g transform="translate(515, 0)">
+        <rect width="155" height="36" rx="8" fill="#1E293B" fill-opacity="0.6" stroke="#475569" stroke-width="1" />
+        <text x="77" y="23" text-anchor="middle" fill="#34D399" font-family="sans-serif" font-size="13" font-weight="600">🧬 Production MLOps</text>
+      </g>
+      <!-- Pill 5 -->
+      <g transform="translate(685, 0)">
+        <rect width="155" height="36" rx="8" fill="#1E293B" fill-opacity="0.6" stroke="#475569" stroke-width="1" />
+        <text x="77" y="23" text-anchor="middle" fill="#F472B6" font-family="sans-serif" font-size="13" font-weight="600">🛡️ AI Governance</text>
+      </g>
+    </g>
+
+    <!-- Bottom Decorative Glow Line -->
+    <path d="M 250 310 L 950 310" stroke="url(#glowLine)" stroke-width="2" />
+  </g>
+</svg>
